@@ -1,0 +1,26 @@
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.register-form{
+    border: 1px solid gray;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.spinner{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.page-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
