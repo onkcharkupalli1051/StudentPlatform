@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import main from "../assets/sandeepPatil.png"
+import logo from "../assets/dnalogo.png"
 
 const AdminRegister = () => {
   const navigate = useNavigate();
@@ -32,113 +34,124 @@ const AdminRegister = () => {
 
   return (
     <>
-      <div className="form-container">
-        <Form
-          layout="vertical"
-          onFinish={onFinishHandler}
-          className="register-form"
-        >
-          <h1 className="text-center">Admin Register</h1>
-          {/* Name */}
-          <Form.Item
-            label="Name"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Please input your name!",
-              },
-            ]}
-          >
-            <Input type="text" required />
-          </Form.Item>
+      <section className="adminRegisterForm mt-4">
+        <div className="container">
+          <div className="row adminRegisterRow" style={{ backgroundColor: '#000', borderRadius: '30px', boxShadow: '12px 12px 22px rgb(60, 59, 59)' }}>
+            <div className="col-lg-5">
+              <img src={main} alt="Main Image" className="img-fluid dna-img-register" />
+            </div>
+            <div className="col-lg-7 box">
+              <div className="img-title">
+                <img src={logo} alt="logo" className="logo" />
+                <h3 className="title">
+                  The <span className="mainText">DNA</span>-Confidence
+                </h3>
+              </div>
+              <Form
+                layout="vertical"
+                onFinish={onFinishHandler}
+                className="register-form"
+                style={{width:'60%'}}
+              >
+                {/* <h1 className="text-center">Admin Register</h1> */}
+                {/* Name */}
+                <Form.Item
+                  name="name"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your name!",
+                    },
+                  ]}
+                >
+                  <Input type="text" required placeholder="Enter your Name" className="p-2" />
+                </Form.Item>
 
-          {/* Email */}
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                type: "email",
-                message: "The input is not valid E-mail!",
-              },
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input type="email" required />
-          </Form.Item>
+                {/* Email */}
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      type: "email",
+                      message: "The input is not valid E-mail!",
+                    },
+                    {
+                      required: true,
+                      message: "Please input your email!",
+                    },
+                  ]}
+                >
+                  <Input type="email" required placeholder="Email" className="p-2" />
+                </Form.Item>
 
-          {/* Admin ID */}
-          <Form.Item
-            label="adminID"
-            name="adminid"
-            rules={[
-              {
-                required: true,
-                message: "Please input provided Admin ID!",
-              },
-            ]}
-          >
-            <Input type="number" required />
-          </Form.Item>
+                {/* Admin ID */}
+                <Form.Item
+                  name="adminid"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input provided Admin ID!",
+                    },
+                  ]}
+                >
+                  <Input type="number" required placeholder="Admin Id" className="p-2" />
+                </Form.Item>
 
-          {/* Password */}
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input type="password" required />
-          </Form.Item>
+                {/* Password */}
+                <Form.Item
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your password!",
+                    },
+                  ]}
+                >
+                  <Input type="password" required placeholder="Password" className="p-2" />
+                </Form.Item>
 
-          {/* Confirm Password */}
-          <Form.Item
-            label="Confirm Password"
-            name="confirmpassword"
-            dependencies={["password"]}
-            rules={[
-              {
-                required: true,
-                message: "Please Confirm Password!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input type="password" required />
-          </Form.Item>
+                {/* Confirm Password */}
+                <Form.Item
+                  name="confirmpassword"
+                  dependencies={["password"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please Confirm Password!",
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(
+                            "The two passwords that you entered do not match!"
+                          )
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input type="password" required placeholder="Confirm Password" className="p-2" />
+                </Form.Item>
 
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-
-          <Form.Item>
-            <Link to="/adminLogin">
-              Admin Already Registered? Click to Login
-            </Link>
-            <br />
-            <Link to="/userlogin">Click to login as user</Link>
-          </Form.Item>
-        </Form>
-      </div>
+                <Button className="register-btn submit-btn" htmlType="submit">
+                  Register
+                </Button>
+                <br /><br />
+                <Form.Item>
+                  <Link to="/adminLogin" className="anchor">
+                    Admin Already Registered? Click to Login
+                  </Link>
+                  <br />
+                  <Link to="/userlogin" className="anchor">Click to login as user</Link>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import { Form, Input, message, Button } from "antd";
 import { Checkbox, Divider } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
-import type { CheckboxValueType } from "antd/es/checkbox/Group";
+import { CheckboxChangeEvent } from "antd/es/checkbox"; // import type ...
+import { CheckboxValueType } from "antd/es/checkbox/Group"; // import type ...
 import { useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import "../../styles/LayoutStyles.css";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -78,7 +79,7 @@ const HabitReport = () => {
   return (
     <Layout>
       <div className="page-container">
-        <Form layout="vertical"  onFinish={handleFinish} className="register-form">
+        <Form layout="vertical"  onFinish={handleFinish} className="habitReport__form">
           <h1>Habit Report</h1>
 
           <Checkbox

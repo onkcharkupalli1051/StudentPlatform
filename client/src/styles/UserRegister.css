@@ -1,0 +1,33 @@
+.register-form {
+  width: 60%;
+}
+
+.userRegisterRow {
+  background-color: black;
+  border-radius: 30px;
+  box-shadow: 12px 12px 22px rgb(60, 59, 59);
+}
+
+.dna-img-register {
+  width: 93%;
+  height: 100%;
+}
+
+/* ReactPhoneInput style start */
+.flag-dropdown{
+    padding: 0;
+}
+
+.react-tel-input .form-control {
+    margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	height: 2.7rem !important;
+	position: relative;
+	letter-spacing: .01rem;
+	border-radius: 6px !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	width: 100% !important;
+	font-size: 0.9rem !important;
+}
+/* ReactPhoneInput style end */
