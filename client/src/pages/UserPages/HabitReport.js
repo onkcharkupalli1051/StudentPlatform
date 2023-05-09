@@ -16,14 +16,12 @@ const plainOptions = [
   "Reading, ",
   "Listening, ",
   "Vocabulary, ",
-  "Coordination Session, ",
   "Buddy Talk, ",
 ];
 const defaultCheckedList = [
   "Reading, ",
   "Listening, ",
   "Vocabulary, ",
-  "Coordination Session, ",
   "Buddy Talk, ",
 ];
 
