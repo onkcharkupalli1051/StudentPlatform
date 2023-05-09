@@ -13,18 +13,18 @@ import "../../styles/LayoutStyles.css";
 const CheckboxGroup = Checkbox.Group;
 
 const plainOptions = [
-  "Reading ",
-  "Listening ",
-  "Vocabulary ",
-  "Coordination Session ",
-  "Buddy Talk ",
+  "Reading, ",
+  "Listening, ",
+  "Vocabulary, ",
+  "Coordination Session, ",
+  "Buddy Talk, ",
 ];
 const defaultCheckedList = [
-  "Reading ",
-  "Listening ",
-  "Vocabulary ",
-  "Coordination Session ",
-  "Buddy Talk ",
+  "Reading, ",
+  "Listening, ",
+  "Vocabulary, ",
+  "Coordination Session, ",
+  "Buddy Talk, ",
 ];
 
 const HabitReport = () => {
@@ -52,7 +52,7 @@ const HabitReport = () => {
       'report' : checkedList,
       'name': user.name,
       'userid': user._id,
-      'date': `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
+      'date': `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
     }
     console.log(values);
 

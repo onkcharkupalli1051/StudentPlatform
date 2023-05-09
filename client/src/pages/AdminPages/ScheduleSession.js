@@ -13,8 +13,8 @@ const ScheduleSession = () => {
   const handleFinish = async (fieldsvalue) => {
     const values = {
       ...fieldsvalue,
-      'date': fieldsvalue['date'].format('YYYY-MM-DD'),
-      'time': fieldsvalue['time'].format('HH:mm:ss'),
+      'date': fieldsvalue['date'].format('DD-MM-YYYY'),
+      'time': fieldsvalue['time'].format('HH:mm'),
     }
     try {
       dispatch(showLoading())

@@ -15,6 +15,7 @@ const Layout = ({ children }) => {
     localStorage.clear();
     message.success("Logout Successfull");
     navigate("/userlogin");
+    window.location.reload();
   };
 
   // const content = (
@@ -60,9 +61,9 @@ const Layout = ({ children }) => {
             <div className="header">
               <div className="header-content">
                 <Popover
-                  content={
-                    user?.notification.map((noti) => <p>{noti.message}</p>).reverse()
-                  }
+                  content={user?.notification
+                    .map((noti) => <p>{noti.message}</p>)
+                    .reverse()}
                   title="Notification"
                   trigger="click"
                 >

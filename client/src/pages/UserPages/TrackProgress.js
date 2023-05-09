@@ -46,7 +46,6 @@ const TrackProgress = () => {
       dispatch(hideLoading());
 
       if (res.data.success) {
-        message.success("Post Success");
         setAllPostProgress(res.data.data);
       } else {
         message.error(res.data.message);
@@ -75,12 +74,12 @@ const TrackProgress = () => {
   return (
     <Layout>
       <div>
-        <h1>Track Progress</h1>
-
-        <Table columns={columns} dataSource={allProgress} />
-
         <h2>User Progress</h2>
         <Table columns={columns} dataSource={allPostProgress} />
+
+        {/* <h1>All Other User Progress</h1>
+
+        <Table columns={columns} dataSource={allProgress} /> */}
       </div>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import { Card, Space, message, Table } from "antd";
+import { Card, Space, message, Table, Input, Button } from "antd";
 import axios from "axios";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,8 @@ const UserSchedule = () => {
 
   const [allschedule, setAllSchedule] = useState([]);
 
+  const [today, setToday] = useState([]);
+
   const getSchedule = async () => {
     try {
       const res = await axios.get("/api/v1/user/userschedule", {
@@ -20,27 +22,66 @@ const UserSchedule = () => {
       });
       if (res.data.success) {
         console.log(res.data.data);
-        setAllSchedule(res.data.data);
+
+        const date = new Date();
+        const datestring =
+          date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        const monthstring =
+          date.getMonth() + 1 < 10
+            ? "0" + (date.getMonth() + 1)
+            : date.getMonth() + 1;
+        const todayDateString = `${datestring}-${monthstring}-${date.getFullYear()}`;
+
+        setToday(
+          res.data.data.filter(function (el) {
+            return el.date == todayDateString;
+          })
+        );
+        console.log(`Today : ${todayDateString} :${today}`);
+
+        setAllSchedule(
+          res.data.data.filter(function (el) {
+            const date1 = new Date(el.date);
+            const date2 = new Date(todayDateString);
+            return date1 > date2;
+          })
+        );
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   const [roomTitle, setRoomTitle] = useState("");
+
   const submitTitle = (e) => {
     e.preventDefault();
     navigate(`/room/${roomTitle}`);
   };
-  
+
   const joinController = async (record, status) => {
     try {
-      console.log(record.title)
+      console.log(record.title);
     } catch (error) {
       message.error("Something went wrong");
       message.error(error);
     }
   };
+
+  const todaycolumns = [
+    {
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+    },
+    {
+      title: "Time",
+      dataIndex: "time",
+    },
+  ];
 
   const columns = [
     {
@@ -55,20 +96,6 @@ const UserSchedule = () => {
       title: "Time",
       dataIndex: "time",
     },
-    {
-      title: "Join",
-      dataIndex: "join",
-      render: (text, record) => (
-        <div className="d-flex">
-          <button
-            className={`btn btn-success`}
-            onClick={() => {joinController()}}
-          >
-            Join Meeting
-          </button>
-        </div>
-      ),
-    },
   ];
 
   useEffect(() => {
@@ -77,20 +104,26 @@ const UserSchedule = () => {
 
   return (
     <Layout>
-      <h1>My Schedule</h1>
-
       <form className="register-form" onSubmit={submitTitle}>
-        <label htmlFor="">Enter Room Title</label>
+        
         <input
           type="text"
           required
-          placeholder="Room Title"
+          placeholder="Enter Schedule Title"
           value={roomTitle}
           onChange={(e) => setRoomTitle(e.target.value)}
         />
-        <button type="submit">Join</button>
+        <button type="submit" className="btn btn-primary">Join</button>
       </form>
 
+      <hr />
+
+      <h3>Today's Schedule</h3>
+      <Table columns={todaycolumns} dataSource={today} />
+
+      <hr />
+
+      <h3>Upcoming Schedule</h3>
       <Table columns={columns} dataSource={allschedule} />
     </Layout>
   );
