@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import "../../styles/Profile.css"
 
 const UserProfile = () => {
   const params = useParams();
@@ -33,14 +34,22 @@ const UserProfile = () => {
   useEffect(() => {
     getUserInfo()
   }, [])
-  
+
   return (
     <Layout>
-      <div>
-        <h1>My Profile</h1>
-        <h2>Name : {currentUser?.name}</h2>
-        <h2>Email : {currentUser?.email}</h2>
-        <h2>Phone : {currentUser?.phonenumber}</h2>
+      <div className="__profile">
+        <div className="background"></div>
+        <img src="https://www.kindpng.com/picc/m/24-248325_profile-picture-circle-png-transparent-png.png" alt="user profile" className="user__img" />
+        {/* <h1>My Profile</h1> */}
+        <div className="__details">
+          <h2>{currentUser?.name}</h2>
+          <h5>Contact Details</h5>
+          <div className="contact__details">
+            <p>{currentUser?.email}</p>
+            <hr />
+            <p>{currentUser?.phonenumber}</p>
+          </div>
+        </div>
       </div>
     </Layout>
   );

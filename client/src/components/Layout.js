@@ -34,8 +34,8 @@ const Layout = ({ children }) => {
       <div className="main">
         <div className="layout">
           <div className="sidebar">
-            <div className="logo">
-              <h6>Student Platform</h6>
+            <div className="title">
+              <h3>Student Platform</h3>
               <hr />
             </div>
             <div className="menu">

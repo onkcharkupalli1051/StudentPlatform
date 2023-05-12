@@ -3,12 +3,13 @@ import AdminLayout from "./../../components/AdminLayout";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import "../../styles/Profile.css"
 
 const AdminProfile = () => {
   const params = useParams();
 
   const { user } = useSelector((state) => state.admin);
-  
+
   const [admin, setAdmin] = useState({});
 
   const getAdminInfo = async () => {
@@ -26,17 +27,17 @@ const AdminProfile = () => {
       //   setAdmin(res.data.data);
       // }
 
-      const res = await axios.post("/api/v1/admin/getadmindata", 
-      {
-        token: localStorage.getItem("admintoken"),
-      }, 
-      {
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem('admintoken')}`
-        }
-      });
-      
-      if(res.data.success){
+      const res = await axios.post("/api/v1/admin/getadmindata",
+        {
+          token: localStorage.getItem("admintoken"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('admintoken')}`
+          }
+        });
+
+      if (res.data.success) {
         setAdmin(res.data.data)
       }
     } catch (error) {
@@ -50,13 +51,19 @@ const AdminProfile = () => {
 
   return (
     <AdminLayout>
-      <div>
-        <h1>Admin Profile</h1>
-        
-        <h2>Name : {admin?.name}</h2>
-        <h2>Email : {admin?.email}</h2>
-        <h2>Admin ID : {admin?.adminid}</h2>
-        
+      <div className="__profile">
+        <div className="background"></div>
+        <img src="https://www.kindpng.com/picc/m/24-248325_profile-picture-circle-png-transparent-png.png" alt="img" className="user__img" />
+        {/* <h1>Admin Profile</h1> */}
+        <div className="__details">
+          <h2 className="admin__name">{admin?.name}</h2>
+          <h5>Contact Details</h5>
+          <div className="contact__details">
+            <p>{admin?.email}</p>
+            <hr />
+            <p>Id : {admin?.adminid}</p>
+          </div>
+        </div>
       </div>
     </AdminLayout>
   );
