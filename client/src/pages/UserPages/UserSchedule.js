@@ -105,15 +105,22 @@ const UserSchedule = () => {
   return (
     <Layout>
       <form className="register-form" onSubmit={submitTitle}>
-        
+
         <input
           type="text"
           required
           placeholder="Enter Schedule Title"
           value={roomTitle}
           onChange={(e) => setRoomTitle(e.target.value)}
+          style={{ padding: '5px' }}
         />
-        <button type="submit" className="btn btn-primary">Join</button>
+        <button 
+          type="submit" 
+          className="btn btn-primary"
+          style={{marginLeft: '10px'}}
+          >
+          Join
+        </button>
       </form>
 
       <hr />
