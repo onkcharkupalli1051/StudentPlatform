@@ -4,7 +4,8 @@ const {
   adminRegisterController,
   authAdminController,
   scheduleSessionController,
-  getAdminInfoController
+  getAdminInfoController,
+  usertrackProgressController
 } = require("../controllers/adminCtrl");
 const authAdminMiddleware = require('../middlewares/authAdminMiddleware')
 
@@ -26,5 +27,8 @@ adminrouter.post("/schedulesession", authAdminMiddleware, scheduleSessionControl
 
 //Get Admin INfo ||Post
 adminrouter.post("/getadmininfo", authAdminMiddleware, getAdminInfoController)
+
+//Activity || REPORT || Get
+adminrouter.get('/trackprogress', authAdminMiddleware, usertrackProgressController)
 
 module.exports = adminrouter;

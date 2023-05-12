@@ -1,15 +1,5 @@
 export const SidebarMenu = [
     {
-        name: 'Home Page',
-        path: '/adminhomepage',
-        icon: 'fa-solid fa-house'
-    },
-    {
-        name: 'Assign Coordinator',
-        path: '/assigncoordinator',
-        icon: 'fa-solid fa-plus'
-    },
-    {
         name: 'Schedule Session',
         path: '/schedulesession',
         icon: 'fa-solid fa-solid fa-clock'

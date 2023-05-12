@@ -12,11 +12,6 @@ export const Temp = () => {
 
 export const SidebarMenu = [
     {
-        name: 'Home Page',
-        path: '/',
-        icon: 'fa-solid fa-house'
-    },
-    {
         name: 'My Schedule',
         path: '/userschedule',
         icon: 'fa-solid fa-solid fa-clock'

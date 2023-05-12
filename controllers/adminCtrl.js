@@ -155,10 +155,36 @@ const getAdminInfoController = async (req, res) => {
   }
 };
 
+const usertrackProgressController = async (req,res) => {
+  try {
+    const progress = await habitReportModel.find({});
+    if (!progress) {
+      return res.status(200).send({
+        message: "Error retrieving progress",
+        success: false,
+      });
+    } else {
+      res.status(200).send({
+        message: "Progress Data",
+        success: true,
+        data: progress,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Someting Went Wrong",
+      success: false,
+      error,
+    });
+  }
+}
+
 module.exports = {
   adminLoginController,
   adminRegisterController,
   authAdminController,
   scheduleSessionController,
   getAdminInfoController,
+  usertrackProgressController
 };
