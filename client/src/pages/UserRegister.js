@@ -46,10 +46,14 @@ const UserRegister = () => {
             </div>
             <div className="col-lg-7 box ">
               <div className="img-title">
-                <img src={logo} alt="logo" className="logo" />
+                {/* <img src={logo} alt="logo" className="logo" /> */}
                 <h3 className="title">
                   The <span className="mainText">DNA</span>-Confidence
+                  <br />
+                  <h4 style={{marginLeft:"90px"}}>Student Platform</h4>
+                <h4 style={{marginLeft:"83px"}} className="anchor">Register New User</h4>
                 </h3>
+
               </div>
               <Form
                 // layout="vertical"
@@ -101,7 +105,7 @@ const UserRegister = () => {
                     country={"in"}
                     value={inputPhoneNumber}
                     onChange={(phone) => setInputPhoneNumber(phone)}
-                    className=""
+                    
                   />
                 </Form.Item>
 

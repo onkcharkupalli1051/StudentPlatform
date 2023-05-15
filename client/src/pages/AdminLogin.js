@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
-import main from "../assets/sandeepPatil.png"
-import logo from "../assets/dnalogo.png"
+import main from "../assets/sandeepPatil.png";
+import logo from "../assets/dnalogo.png";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -37,22 +37,35 @@ const AdminLogin = () => {
     <>
       <section className="adminLoginForm mx-5 mt-4">
         <div className="container">
-          <div className="row adminLoginRow" style={{backgroundColor:'#000', borderRadius:'30px', boxShadow:'12px 12px 22px rgb(60, 59, 59)'}}>
+          <div
+            className="row adminLoginRow"
+            style={{
+              backgroundColor: "#000",
+              borderRadius: "30px",
+              boxShadow: "12px 12px 22px rgb(60, 59, 59)",
+            }}
+          >
             <div className="col-lg-5">
               <img src={main} alt="Main Image" className="img-fluid dna-img" />
             </div>
+
             <div className="col-lg-7 box px-5 py-5">
               <div className="img-title">
                 <img src={logo} alt="logo" className="logo" />
                 <h3 className="title">
                   The <span className="mainText">DNA</span>-Confidence
+                  <br />
+                  <h4 style={{ marginLeft: "90px" }}>Student Platform</h4>
+                  <h4 style={{ marginLeft: "110px" }} className="anchor">
+                    Admin Login
+                  </h4>
                 </h3>
               </div>
               <Form
                 layout="vertical"
                 onFinish={onFinishHandler}
                 className="login-form"
-                style={{width:'60%'}}
+                style={{ width: "60%" }}
               >
                 {/* <h1 className="text-center">Admin Login</h1> */}
 
@@ -71,7 +84,12 @@ const AdminLogin = () => {
                     },
                   ]}
                 >
-                  <Input type="email" required placeholder="Email" className="p-2"/>
+                  <Input
+                    type="email"
+                    required
+                    placeholder="Email"
+                    className="p-2"
+                  />
                 </Form.Item>
 
                 {/* Admin ID */}
@@ -85,7 +103,12 @@ const AdminLogin = () => {
                     },
                   ]}
                 >
-                  <Input type="number" required placeholder="Enter your Id" className="p-2"/>
+                  <Input
+                    type="password"
+                    required
+                    placeholder="Enter your Id"
+                    className="p-2"
+                  />
                 </Form.Item>
 
                 {/* Password */}
@@ -98,17 +121,27 @@ const AdminLogin = () => {
                     },
                   ]}
                 >
-                  <Input type="password" required placeholder="Password" className="p-2"/>
+                  <Input
+                    type="password"
+                    required
+                    placeholder="Password"
+                    className="p-2"
+                  />
                 </Form.Item>
 
                 <Button htmlType="submit" className="login-btn submit-btn">
                   Login
                 </Button>
-                <br /><br />
+                <br />
+                <br />
                 <Form.Item>
-                  <Link to="/adminregister" className="anchor">Not Registered? Click to Register</Link>
+                  <Link to="/adminregister" className="anchor">
+                    Admin Not Registered? Click to Register
+                  </Link>
                   <br />
-                  <Link to="/userlogin" className="anchor">Click to login as user</Link>
+                  <Link to="/userlogin" className="anchor">
+                    Click to login as user
+                  </Link>
                 </Form.Item>
               </Form>
             </div>

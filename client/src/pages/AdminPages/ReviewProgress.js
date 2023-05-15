@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
-import { Table } from "antd";
+import { Table, Input, Space } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import { message } from "antd";
+import moment from "moment";
 
 const ReviewProgress = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const ReviewProgress = () => {
   const { admin } = useSelector((state) => state.admin);
 
   const [allProgress, setAllProgress] = useState([]);
+
+  const [searchedText, setSearchedText] = useState("");
 
   function GetSortOrder(prop) {
     return function (a, b) {
@@ -33,7 +36,7 @@ const ReviewProgress = () => {
         },
       });
       if (res.data.success) {
-        res.data.data.sort(GetSortOrder("name"));
+        // res.data.data.sort(GetSortOrder("name"));
         console.log(res.data.data);
         setAllProgress(res.data.data);
       }
@@ -48,7 +51,14 @@ const ReviewProgress = () => {
   }, []);
 
   const columns = [
-    { title: "Name", dataIndex: "name" },
+    {
+      title: "Name",
+      dataIndex: "name",
+      filteredValue: [searchedText],
+      onFilter: (value, record) => {
+        return String(record.name).toLowerCase().includes(value.toLowerCase());
+      },
+    },
     {
       title: "Date",
       dataIndex: "date",
@@ -57,14 +67,30 @@ const ReviewProgress = () => {
       title: "Progress",
       dataIndex: "report",
     },
+    {
+      title: "Total Time (minutes)",
+      dataIndex: "timeSpent",
+    },
   ];
 
   return (
     <AdminLayout>
       <div>
         <h1>Review Progress</h1>
-        <br />
-        <Table columns={columns} dataSource={allProgress} />
+
+        <Space.Compact>
+          <Input.Search
+            placeholder="Search By Name"
+            style={{ marginBottom: 8 }}
+            onSearch={(value) => {
+              setSearchedText(value);
+            }}
+            onChange={(e) => {
+              setSearchedText(e.target.value);
+            }}
+          />
+        </Space.Compact>
+        <Table columns={columns} dataSource={allProgress} size="small"/>
       </div>
     </AdminLayout>
   );

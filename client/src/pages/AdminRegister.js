@@ -42,10 +42,15 @@ const AdminRegister = () => {
             </div>
             <div className="col-lg-7 box">
               <div className="img-title">
-                <img src={logo} alt="logo" className="logo" />
+                {/* <img src={logo} alt="logo" className="logo" /> */}
                 <h3 className="title">
                   The <span className="mainText">DNA</span>-Confidence
+                  <br />
+                  <h4 style={{marginLeft:"90px"}} >Student Platform</h4>
+                <h4 style={{marginLeft:"95px"}} className="anchor">Admin Register</h4>
                 </h3>
+                
+
               </div>
               <Form
                 layout="vertical"
@@ -94,7 +99,7 @@ const AdminRegister = () => {
                     },
                   ]}
                 >
-                  <Input type="number" required placeholder="Admin Id" className="p-2" />
+                  <Input type="password" required placeholder="Admin Id" className="p-2" />
                 </Form.Item>
 
                 {/* Password */}

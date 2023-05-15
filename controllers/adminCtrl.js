@@ -140,7 +140,7 @@ const scheduleSessionController = async (req, res) => {
 const getAdminInfoController = async (req, res) => {
   try {
     const admin = adminModel.find({ _id: req.body.userId });
-    
+
     res.status(200).send({
       success: true,
       data: admin,
@@ -155,7 +155,7 @@ const getAdminInfoController = async (req, res) => {
   }
 };
 
-const usertrackProgressController = async (req,res) => {
+const usertrackProgressController = async (req, res) => {
   try {
     const progress = await habitReportModel.find({});
     if (!progress) {
@@ -178,7 +178,72 @@ const usertrackProgressController = async (req,res) => {
       error,
     });
   }
-}
+};
+
+const manageUsersController = async (req, res) => {
+  try {
+    const users = await userModel.find({});
+    if (!users) {
+      return res.status(200).send({
+        message: "Error retrieving users",
+        success: false,
+      });
+    } else {
+      res.status(200).send({
+        message: "Users Data",
+        success: true,
+        data: users,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Someting Went Wrong",
+      success: false,
+      error,
+    });
+  }
+};
+
+const deleteUserController = async (req, res) => {
+  try {
+    let {id} = req.params;
+    // console.log();
+    // console.log(typeof oldid);
+    // console.log(oldid);
+
+    // const id = oldid["id"].toString().slice(1);
+    // console.log();
+    // console.log(typeof id);
+    // console.log(id);
+
+    // const newid = JSON.parse(`{ "id":"${id}"}`);
+    // console.log();
+    // console.log(typeof newid);
+    // console.log(newid);
+
+    const user = await userModel.findOne({_id: id});
+    if (!user) {
+      return res.status(200).send({
+        message: "User Not Found",
+        success: false,
+      });
+    }else {
+      await user.deleteOne();
+      res.status(200).send({
+        message: "User Deleted",
+        success: true,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error Deleting User",
+    });
+  }
+};
 
 module.exports = {
   adminLoginController,
@@ -186,5 +251,7 @@ module.exports = {
   authAdminController,
   scheduleSessionController,
   getAdminInfoController,
-  usertrackProgressController
+  usertrackProgressController,
+  manageUsersController,
+  deleteUserController,
 };

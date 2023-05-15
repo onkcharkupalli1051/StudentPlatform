@@ -23,6 +23,7 @@ import AdminProfile from "./pages/AdminPages/AdminProfile";
 import TrackProgress from "./pages/UserPages/TrackProgress";
 import UserProfile from "./pages/UserPages/UserProfile";
 import Room from "./pages/UserPages/Room";
+import ManageUsers from "./pages/AdminPages/ManageUsers";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -39,7 +40,8 @@ function App() {
               path="/"
               element={
                 <ProtectedRoute>
-                  <HomePage />
+                  {/* <HomePage /> */}
+                  <UserSchedule />
                 </ProtectedRoute>
               }
             />
@@ -92,7 +94,7 @@ function App() {
               }
             />
             <Route
-              path="/userprofile/:id"
+              path="/userprofile"
               element={
                 <ProtectedRoute>
                   <UserProfile />
@@ -142,10 +144,10 @@ function App() {
               }
             />
             <Route
-              path="/assigncoordinator"
+              path="/manageusers"
               element={
                 <AdminProtectedRoute>
-                  <AssignCoordinator />
+                  <ManageUsers />
                 </AdminProtectedRoute>
               }
             />

@@ -17,6 +17,10 @@ const habitReportSchema = new mongoose.Schema({
     type: String,
     required: [true, "User ID Is Required"],
   },
+  timeSpent: {
+    type: String,
+    required: [true, "Time Spent Is Required"],
+  },
 });
 
 const habitReportModel = mongoose.model("habitreports", habitReportSchema);

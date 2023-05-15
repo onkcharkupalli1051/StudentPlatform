@@ -1,10 +1,18 @@
 import React from "react";
 import AdminLayout from "../../components/AdminLayout";
-import { Form, Input, message, DatePicker, TimePicker, Button } from "antd";
-import {useSelector, useDispatch} from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import {
+  Form,
+  Input,
+  message,
+  DatePicker,
+  TimePicker,
+  Button,
+  Space,
+} from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "./../../redux/features/alertSlice";
-import axios from 'axios';
+import axios from "axios";
 
 const ScheduleSession = () => {
   const dispatch = useDispatch();
@@ -13,26 +21,26 @@ const ScheduleSession = () => {
   const handleFinish = async (fieldsvalue) => {
     const values = {
       ...fieldsvalue,
-      'date': fieldsvalue['date'].format('DD-MM-YYYY'),
-      'time': fieldsvalue['time'].format('HH:mm'),
-    }
+      date: fieldsvalue["date"].format("DD-MM-YYYY"),
+      time: fieldsvalue["time"].format("HH:mm"),
+    };
     try {
-      dispatch(showLoading())
-      const res = await axios.post('/api/v1/admin/schedulesession', values, {
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem('admintoken')}`
-        }
-      })
-      dispatch(hideLoading())
-      if(res.data.success){
-        message.success(res.data.message)
-      }else{
-        message.error(res.data.message)
+      dispatch(showLoading());
+      const res = await axios.post("/api/v1/admin/schedulesession", values, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("admintoken")}`,
+        },
+      });
+      dispatch(hideLoading());
+      if (res.data.success) {
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
       }
     } catch (error) {
-      console.log(error)
-      dispatch(hideLoading())
-      message.error('Someting Went Wrong')
+      console.log(error);
+      dispatch(hideLoading());
+      message.error("Someting Went Wrong");
     }
 
     console.log(values);
@@ -41,8 +49,13 @@ const ScheduleSession = () => {
   return (
     <AdminLayout>
       <div className="page-container">
-        <Form layout="vertical" onFinish={handleFinish} className="register-form">
+        <Form
+          layout="vertical"
+          onFinish={handleFinish}
+          className="habitReport__form"
+        >
           <h1>Schedule Session</h1>
+
           <Form.Item
             label="Title"
             name="title"
@@ -53,7 +66,9 @@ const ScheduleSession = () => {
               },
             ]}
           >
-            <Input type="text" required />
+            <Space.Compact>
+              <Input type="text" required />
+            </Space.Compact>
           </Form.Item>
 
           <Form.Item
@@ -67,7 +82,7 @@ const ScheduleSession = () => {
               },
             ]}
           >
-            <DatePicker/>
+            <DatePicker />
           </Form.Item>
 
           <Form.Item
@@ -75,7 +90,7 @@ const ScheduleSession = () => {
             label="Time"
             rules={[
               {
-                type: 'object',
+                type: "object",
                 required: true,
                 message: "Please input Time!",
               },

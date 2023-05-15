@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import { useSelector } from "react-redux";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "../../styles/Profile.css"
 
@@ -14,17 +14,31 @@ const UserProfile = () => {
 
   const getUserInfo = async () => {
     try {
-      const res = await axios.post(
-        "/api/v1/user/getUserInfo",
-        { userId: params.id },
+      // const res = await axios.post(
+      //   "/api/v1/user/getUserInfo",
+      //   { userId: params.id },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //     },
+      //   }
+      // );
+      // if (res.data.success) {
+      //   setCurrentUser(res.data.data);
+      // }
+
+      const res = await axios.post("/api/v1/user/getUserData",
+        {
+          token: localStorage.getItem("token"),
+        },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
       if (res.data.success) {
-        setCurrentUser(res.data.data);
+        setCurrentUser(res.data.data)
       }
     } catch (error) {
       console.log(error);

@@ -10,6 +10,11 @@ export const SidebarMenu = [
         icon: 'fa-solid fa-bars-progress'
     },
     {
+        name: 'Manage Users',
+        path: '/manageusers',
+        icon: 'fa-solid fa-users'
+    },
+    {
         name: 'My Profile',
         path: '/adminprofile',
         icon: 'fa-solid fa-user'

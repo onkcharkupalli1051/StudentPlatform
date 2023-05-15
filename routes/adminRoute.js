@@ -5,7 +5,9 @@ const {
   authAdminController,
   scheduleSessionController,
   getAdminInfoController,
-  usertrackProgressController
+  usertrackProgressController,
+  manageUsersController,
+  deleteUserController
 } = require("../controllers/adminCtrl");
 const authAdminMiddleware = require('../middlewares/authAdminMiddleware')
 
@@ -30,5 +32,11 @@ adminrouter.post("/getadmininfo", authAdminMiddleware, getAdminInfoController)
 
 //Activity || REPORT || Get
 adminrouter.get('/trackprogress', authAdminMiddleware, usertrackProgressController)
+
+//Activity || REPORT || Get
+adminrouter.get('/manageusers', authAdminMiddleware, manageUsersController)
+
+//Delete User
+adminrouter.delete("/deleteuser/:id", authAdminMiddleware, deleteUserController)
 
 module.exports = adminrouter;

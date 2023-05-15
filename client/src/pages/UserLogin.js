@@ -51,7 +51,10 @@ const UserLogin = () => {
               <div className="img-title">
                 <img className="logo" src={logo} alt="logo" />
                 <h3 className="title">
-                  The <span className="mainText">DNA</span>-Confidence
+                  The <span className="mainText">DNA</span>-Confidence 
+                  <br />
+                  <h4 style={{marginLeft:"90px"}}>Student Platform</h4>
+                <h4 style={{marginLeft:"120px"}} className="anchor">User Login</h4>
                 </h3>
               </div>
               <Form
@@ -102,7 +105,7 @@ const UserLogin = () => {
                 </Form.Item>
                 <Link to="/adminlogin" className="anchor">Click to login as Admin</Link>
                 <p className="text">
-                  New Student?{" "}
+                  New User?{" "}
                   <Link to="/userregister" className="anchor">
                     Register here
                   </Link>

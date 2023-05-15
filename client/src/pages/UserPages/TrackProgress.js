@@ -69,6 +69,10 @@ const TrackProgress = () => {
       title: "Progress",
       dataIndex: "report",
     },
+    {
+      title: "Total Time (minutes)",
+      dataIndex: "timeSpent",
+    },
   ];
 
   return (
