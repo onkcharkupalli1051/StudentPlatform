@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout";
-import { Form, Input, message, Button } from "antd";
+import { Form, message, Button } from "antd";
 import { Checkbox, Divider } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox"; // import type ...
-import { CheckboxValueType } from "antd/es/checkbox/Group"; // import type ...
 import { useSelector } from "react-redux";
-import { showLoading, hideLoading } from "../../redux/features/alertSlice";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import "../../styles/LayoutStyles.css";
 
@@ -26,7 +22,6 @@ const defaultCheckedList = [
 ];
 
 const HabitReport = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [checkedList, setCheckedList] = useState(defaultCheckedList);
   const [indeterminate, setIndeterminate] = useState(true);
@@ -57,13 +52,13 @@ const HabitReport = () => {
     console.log(values);
 
     try {
-      dispatch(showLoading());
+      
       const res = await axios.post("/api/v1/user/habitreport", values, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      dispatch(hideLoading());
+      
       if (res.data.success) {
         message.success("Habit Report Succesfully Submitted");
       } else {
@@ -71,7 +66,7 @@ const HabitReport = () => {
       }
     } catch (error) {
       console.log(error);
-      dispatch(hideLoading());
+      
       message.error("Someting Went Wrong");
     }
   };

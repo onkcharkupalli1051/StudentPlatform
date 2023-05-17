@@ -4,7 +4,7 @@ import { SidebarMenu } from "../Data/data";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Badge, message, Popover, Space } from "antd";
+import { Badge, message, Popover } from "antd";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);

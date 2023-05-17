@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Input, Button, message } from "antd";
 import "../styles/authenticationStyles.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import main from "../assets/sandeepPatil.png"
-import logo from "../assets/dnalogo.png"
+// import logo from "../assets/dnalogo.png"
 
 const AdminRegister = () => {
   const navigate = useNavigate();

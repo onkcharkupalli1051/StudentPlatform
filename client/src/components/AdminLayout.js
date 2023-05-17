@@ -3,7 +3,7 @@ import "../styles/LayoutStyles.css";
 import { SidebarMenu } from "./../Data/Admindata";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { message, Badge } from "antd";
+import { message, Badge, Popover } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const AdminLayout = ({ children }) => {
@@ -50,8 +50,17 @@ const AdminLayout = ({ children }) => {
           <div className="content">
             <div className="header">
               <div className="header-content">
+                
+                <Popover
+                  content={admin?.notification
+                    .map((noti) => <p>{noti.message}</p>)
+                    .reverse()}
+                  title="Notification"
+                  trigger="click"
+                >
                 <Badge count={admin?.notification.length}></Badge>
                 <i className="fa-solid fa-bell"></i>
+                </Popover>
                 <Link to="/adminprofile">{admin?.name}</Link>
               </div>
             </div>

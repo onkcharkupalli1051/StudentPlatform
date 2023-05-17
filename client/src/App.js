@@ -40,8 +40,8 @@ function App() {
               path="/"
               element={
                 <ProtectedRoute>
-                  {/* <HomePage /> */}
-                  <UserSchedule />
+                  <HomePage />
+                  {/* <UserSchedule /> */}
                 </ProtectedRoute>
               }
             />

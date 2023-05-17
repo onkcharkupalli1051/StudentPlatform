@@ -67,7 +67,7 @@ const userLoginController = async (req, res) => {
 const authController = async (req, res) => {
   try {
     const user = await userModel.findOne({ _id: req.body.userId });
-    
+
     if (!user) {
       return res.status(200).send({
         message: "User Not Found",
@@ -155,25 +155,41 @@ const getUserInfoController = async (req, res) => {
 
 const habitReportController = async (req, res) => {
   try {
-    //saving data  to habit report collection
-    const newHabitReport = new habitReportModel(req.body);
-    await newHabitReport.save();
+    //16 May Logic
+    const exist = await habitReportModel.findOne({ date: req.body.date });
+    if (!exist) {
+      //saving data  to habit report collection
+      const newHabitReport = new habitReportModel(req.body);
+      await newHabitReport.save();
 
-    //notifying user
-    // const user = await userModel.find({_id: newHabitReport._id});
-    // console.log(colors.bgCyan.white(user));
-    // const notification = user.notification;
-    // console.log(colors.green.white(notification));
-    // notification.push({
-    //   message: `Habit Report of date ${newHabitReport.date} Submitted}`,
-    // });
-    // user.save();
-    // console.log(colors.bgCyan.white(notification));
+      //notifying user
+      // const user = await userModel.find({_id: newHabitReport._id});
+      // console.log(colors.bgCyan.white(user));
+      // const notification = user.notification;
+      // console.log(colors.green.white(notification));
+      // notification.push({
+      //   message: `Habit Report of date ${newHabitReport.date} Submitted}`,
+      // });
+      // user.save();
+      // console.log(colors.bgCyan.white(notification));
 
-    res.status(201).send({
-      success: true,
-      message: "Schedule Successfull",
-    });
+      res.status(201).send({
+        success: true,
+        message: "Reporting Successfull",
+      });
+
+      console.log(req.date);
+    } else {
+      await exist.deleteOne();
+
+      const newHabitReport = new habitReportModel(req.body);
+      await newHabitReport.save();
+
+      res.status(200).send({
+        message: "Report Updated",
+        success: true,
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -184,7 +200,7 @@ const habitReportController = async (req, res) => {
   }
 };
 
-const usertrackProgressController = async (req,res) => {
+const usertrackProgressController = async (req, res) => {
   try {
     const progress = await habitReportModel.find({});
     if (!progress) {
@@ -207,12 +223,12 @@ const usertrackProgressController = async (req,res) => {
       error,
     });
   }
-}
+};
 
-const userpostProgressController = async(req,res) => {
+const userpostProgressController = async (req, res) => {
   try {
     const result = await habitReportModel.find({ userid: req.body.userid });
-    if(!result){
+    if (!result) {
       return res
         .status(200)
         .send({ message: "User Not Found", success: false });
@@ -229,7 +245,34 @@ const userpostProgressController = async(req,res) => {
       message: `Post Progress ${error.message}`,
     });
   }
-}
+};
+
+const deleteReportController = async (req, res) => {
+  try {
+    let { id } = req.params;
+
+    const report = await habitReportModel.findOne({ _id: id });
+    if (!report) {
+      return res.status(200).send({
+        message: "Report Not Found",
+        success: false,
+      });
+    } else {
+      await report.deleteOne();
+      res.status(200).send({
+        message: "Report Deleted",
+        success: true,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error Deleting Report",
+    });
+  }
+};
 
 module.exports = {
   userLoginController,
@@ -240,5 +283,6 @@ module.exports = {
   getUserInfoController,
   habitReportController,
   usertrackProgressController,
-  userpostProgressController
+  userpostProgressController,
+  deleteReportController,
 };

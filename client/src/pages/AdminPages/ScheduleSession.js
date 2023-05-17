@@ -9,14 +9,12 @@ import {
   Button,
   Space,
 } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "./../../redux/features/alertSlice";
 import axios from "axios";
 
 const ScheduleSession = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleFinish = async (fieldsvalue) => {
     const values = {
@@ -67,7 +65,7 @@ const ScheduleSession = () => {
             ]}
           >
             <Space.Compact>
-              <Input type="text" required />
+              <Input type="text" required size="medium"/>
             </Space.Compact>
           </Form.Item>
 
@@ -82,7 +80,7 @@ const ScheduleSession = () => {
               },
             ]}
           >
-            <DatePicker />
+            <DatePicker size="medium"/>
           </Form.Item>
 
           <Form.Item
@@ -96,7 +94,7 @@ const ScheduleSession = () => {
               },
             ]}
           >
-            <TimePicker />
+            <TimePicker size="large"/>
           </Form.Item>
 
           <Button type="primary" htmlType="submit">

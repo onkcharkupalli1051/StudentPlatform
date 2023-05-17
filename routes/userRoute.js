@@ -8,7 +8,8 @@ const {
   getUserInfoController,
   habitReportController,
   usertrackProgressController,
-  userpostProgressController
+  userpostProgressController,
+  deleteReportController
 } = require("../controllers/userCtrl");
 const authMiddleware = require("../middlewares/authMiddleware")
 
@@ -42,4 +43,7 @@ userrouter.get('/trackprogress', authMiddleware, usertrackProgressController)
 
 //post progress
 userrouter.post('/postprogress', authMiddleware, userpostProgressController)
+
+//Delete report
+userrouter.delete("/deletereport/:id", authMiddleware, deleteReportController);
 module.exports = userrouter;

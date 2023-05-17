@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import { Card, Space, message, Table, Input, Button } from "antd";
+import { message, Table } from "antd";
 import axios from "axios";
-import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const UserSchedule = () => {
   const navigate = useNavigate();
-
+  
   const [allschedule, setAllSchedule] = useState([]);
 
   const [today, setToday] = useState([]);
 
+  const [searchedText, setSearchedText] = useState("");
+
   const getSchedule = async () => {
     try {
+      
       const res = await axios.get("/api/v1/user/userschedule", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,20 +35,23 @@ const UserSchedule = () => {
 
         setToday(
           res.data.data.filter(function (el) {
-            return el.date == todayDateString;
+            return el.date === todayDateString;
           })
         );
         console.log(`Today : ${todayDateString} :${today}`);
 
         setAllSchedule(
           res.data.data.filter(function (el) {
-            const date1 = new Date(el.date);
-            const date2 = new Date(todayDateString);
+            const date1 = el.date;
+            const date2 = todayDateString;
+            console.log(date1, date2);
             return date1 > date2;
           })
         );
+        
       }
     } catch (error) {
+      
       console.log(error);
     }
   };
@@ -72,6 +76,10 @@ const UserSchedule = () => {
     {
       title: "Title",
       dataIndex: "title",
+      filteredValue: [searchedText],
+      onFilter: (value, record) => {
+        return String(record.title).toLowerCase().includes(value.toLowerCase());
+      },
     },
     {
       title: "Date",
@@ -81,7 +89,31 @@ const UserSchedule = () => {
       title: "Time",
       dataIndex: "time",
     },
+    {
+      title: "Join",
+      dataIndex: "actions",
+      render: (text, record) => (
+        <div className="d-flex">
+          <button
+            className="btn btn-success ms-2"
+            onClick={() => handleJoin(record)}
+          >
+            <i className="fa-solid fa-video"></i>
+          </button>
+        </div>
+      ),
+    },
   ];
+
+  const handleJoin = async (record) => {
+    try {
+      
+      navigate(`/room/${record.title.split(" ").join("")}`);
+    } catch (error) {
+      
+      message.error(error);
+    }
+  };
 
   const columns = [
     {
@@ -105,20 +137,19 @@ const UserSchedule = () => {
   return (
     <Layout>
       <form className="register-form" onSubmit={submitTitle}>
-
         <input
           type="text"
           required
           placeholder="Enter Schedule Title"
           value={roomTitle}
           onChange={(e) => setRoomTitle(e.target.value)}
-          style={{ padding: '5px' }}
+          style={{ padding: "5px" }}
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="btn btn-primary"
-          style={{marginLeft: '10px'}}
-          >
+          style={{ marginLeft: "10px" }}
+        >
           Join
         </button>
       </form>
@@ -126,12 +157,12 @@ const UserSchedule = () => {
       <hr />
 
       <h3>Today's Schedule</h3>
-      <Table columns={todaycolumns} dataSource={today} />
+      <Table columns={todaycolumns} dataSource={today} size="small" />
 
       <hr />
 
       <h3>Upcoming Schedule</h3>
-      <Table columns={columns} dataSource={allschedule} />
+      <Table columns={columns} dataSource={allschedule} size="small" />
     </Layout>
   );
 };

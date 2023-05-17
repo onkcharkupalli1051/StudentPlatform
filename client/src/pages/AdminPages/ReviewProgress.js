@@ -2,31 +2,24 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import { Table, Input, Space } from "antd";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import { message } from "antd";
-import moment from "moment";
 
 const ReviewProgress = () => {
-  const dispatch = useDispatch();
-
-  const { admin } = useSelector((state) => state.admin);
 
   const [allProgress, setAllProgress] = useState([]);
 
   const [searchedText, setSearchedText] = useState("");
 
-  function GetSortOrder(prop) {
-    return function (a, b) {
-      if (a[prop] > b[prop]) {
-        return 1;
-      } else if (a[prop] < b[prop]) {
-        return -1;
-      }
-      return 0;
-    };
-  }
+  // function GetSortOrder(prop) {
+  //   return function (a, b) {
+  //     if (a[prop] > b[prop]) {
+  //       return 1;
+  //     } else if (a[prop] < b[prop]) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   };
+  // }
 
   const getProgress = async () => {
     try {

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import { Space, Input, Table, message } from "antd";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 
 const ManageUsers = () => {
-  const { admin } = useSelector((state) => state.admin);
+  // const { admin } = useSelector((state) => state.admin);
 
   const [allUsers, setAllUsers] = useState([]);
 
@@ -81,6 +81,7 @@ const ManageUsers = () => {
   const handleUsers = async (record) => {
     try {
       if (window.confirm(`Do you want to delete user ${record.name}?`)) {
+        const name = record.name;
         const res = await axios.delete(
           `/api/v1/admin/deleteuser/${record._id}`,
           {
@@ -89,9 +90,8 @@ const ManageUsers = () => {
             },
           }
         );
-        message.success(`${record.name} Deleted Successfully`);
         if (res.data.success) {
-          message.success(`${record.name} Deleted Successfully`);
+          message.success(name + ' Deleted Successfully');
           manageUsers();
         }
       }

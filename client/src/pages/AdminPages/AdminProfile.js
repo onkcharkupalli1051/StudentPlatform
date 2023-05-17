@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "./../../components/AdminLayout";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import "../../styles/Profile.css"
 
 const AdminProfile = () => {
-  const params = useParams();
-
-  const { user } = useSelector((state) => state.admin);
 
   const [admin, setAdmin] = useState({});
 

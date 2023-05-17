@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import "../../styles/Profile.css"
+import "../../styles/Profile.css";
+// import { useParams } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 const UserProfile = () => {
-  const params = useParams();
+  // const params = useParams();
 
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -26,34 +26,40 @@ const UserProfile = () => {
       // if (res.data.success) {
       //   setCurrentUser(res.data.data);
       // }
-
-      const res = await axios.post("/api/v1/user/getUserData",
+      const res = await axios.post(
+        "/api/v1/user/getUserData",
         {
           token: localStorage.getItem("token"),
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      
       if (res.data.success) {
-        setCurrentUser(res.data.data)
+        setCurrentUser(res.data.data);
       }
     } catch (error) {
+      
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getUserInfo()
-  }, [])
+    getUserInfo();
+  }, []);
 
   return (
     <Layout>
       <div className="__profile">
         <div className="background"></div>
-        <img src="https://www.kindpng.com/picc/m/24-248325_profile-picture-circle-png-transparent-png.png" alt="user profile" className="user__img" />
+        <img
+          src="https://www.kindpng.com/picc/m/24-248325_profile-picture-circle-png-transparent-png.png"
+          alt="user profile"
+          className="user__img"
+        />
         {/* <h1>My Profile</h1> */}
         <div className="__details">
           <h2>{currentUser?.name}</h2>

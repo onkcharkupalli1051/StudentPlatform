@@ -22,7 +22,7 @@ const AdminLogin = () => {
         localStorage.setItem("admintoken", res.data.admintoken);
         localStorage.setItem("usertype", res.data.usertype);
         message.success("Login Success");
-        navigate("/adminhomepage");
+        navigate("/schedulesession");
       } else {
         message.error(res.data.message);
       }

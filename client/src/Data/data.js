@@ -1,15 +1,3 @@
-import { useSelector } from "react-redux";
-
-import React from 'react'
-let user;
-
-export const Temp = () => {
-    user = useSelector((state) => state.user);
-  return (
-    <></>
-  )
-}
-
 export const SidebarMenu = [
     {
         name: 'My Schedule',
