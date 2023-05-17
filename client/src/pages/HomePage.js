@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const [currentUser, setCurrentUser] = useState({});
+  const navigate = useNavigate();
+
   //login user data
   const getUserData = async () => {
     try {
@@ -15,8 +19,16 @@ const HomePage = () => {
           },
         }
       );
-    } catch (error) {}
+      if (res.data.success) {
+        setCurrentUser(res.data.data);
+        const myTimeout = setTimeout(redirect, 3000);
+      }
+    } catch (error) {console.log(error);}
   };
+  
+  function redirect() {
+    navigate("/userschedule");
+  }
 
   useEffect(() => {
     getUserData();
@@ -24,7 +36,7 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <h1>HomePage</h1>
+      <h1>Welcome {currentUser?.name}</h1>
     </Layout>
   );
 };
