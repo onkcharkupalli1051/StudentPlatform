@@ -4,9 +4,9 @@
 
 ## Links
 
-- [Repo](https://studntplatform.onrender.com> "<project-name> Repo")
+- [Repo]([https://studntplatform.onrender.com>](https://github.com/onkcharkupalli1051) "<Student Platform> Repo")
 
-- [Live](<[Homepage url](https://studntplatform.onrender.com/)> "Live View")
+- [Live](https://studntplatform.onrender.com/> "Live View")
 
 ## Screenshots
 
